@@ -557,6 +557,7 @@ func (relay *RelayServer) canRelay(from common.Address,
 	approvalData []byte) (res *big.Int, err error) {
 
 	valid := relay.internalCheck(signature, txhash)
+	log.Println("XXXXXXXXXXXXXXXXXXX")
 	log.Println(valid)
 
 	res, err = relay.externalCheck(from, to, encodedFunction, relayFee, gasPrice, gasLimit, recipientNonce, signature, approvalData);

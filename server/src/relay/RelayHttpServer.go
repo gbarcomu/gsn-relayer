@@ -85,12 +85,14 @@ func firebaseSetup() {
 
 	conf := &firebase.Config{ProjectID: "gsn-relayer"}
 
+	log.Println("Before first if")
 	app, err := firebase.NewApp(firebaseContext, conf)
 	if err != nil {
 			log.Println(err)
 			return
 	}
 
+	log.Println("Before second if")
 	firebaseClient, err = app.Firestore(firebaseContext)
 	if err != nil {
 		log.Println(err)
