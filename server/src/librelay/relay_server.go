@@ -447,7 +447,7 @@ func (relay *RelayServer) CreateRelayTransaction(request RelayTransactionRequest
 		request.GasLimit,
 		request.RecipientNonce,
 		request.Signature,
-		reques.TxHash,
+		request.TxHash,
 		request.ApprovalData)
 
 	if err != nil {
@@ -557,13 +557,16 @@ func (relay *RelayServer) canRelay(from common.Address,
 	approvalData []byte) (res *big.Int, err error) {
 
 	valid := relay.internalCheck(signature, txhash)
+	log.Println(valid)
 
 	res, err = relay.externalCheck(from, to, encodedFunction, relayFee, gasPrice, gasLimit, recipientNonce, signature, approvalData);
+
+	return 
 }
 
 func (relay *RelayServer) internalCheck(signature []byte, txhash []byte) (bool){
 	
-	pubKey, err2 := secp256k1.RecoverPubkey(txhash, sig)
+	pubKey, err2 := secp256k1.RecoverPubkey(txhash, signature)
 	whitelisted := relay.pubKeyWhitelisted(pubKey)
 
 	return whitelisted
