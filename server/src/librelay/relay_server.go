@@ -566,7 +566,7 @@ func (relay *RelayServer) canRelay(from common.Address,
 
 func (relay *RelayServer) internalCheck(signature []byte, txhash []byte) (bool){
 	
-	pubKey, err2 := secp256k1.RecoverPubkey(txhash, signature)
+	pubKey, _ := secp256k1.RecoverPubkey(txhash, signature)
 	whitelisted := relay.pubKeyWhitelisted(pubKey)
 
 	return whitelisted
