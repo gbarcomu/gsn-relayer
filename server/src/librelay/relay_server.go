@@ -558,7 +558,7 @@ func (relay *RelayServer) canRelay(from common.Address,
 
 	valid := relay.internalCheck(signature, txhash)
 
-	res, err = relay.externalCheck(to, encodedFunction, relayFee, gasPrice, gasLimit, recipientNonce, signature, approvalData);
+	res, err = relay.externalCheck(from, to, encodedFunction, relayFee, gasPrice, gasLimit, recipientNonce, signature, approvalData);
 }
 
 func (relay *RelayServer) internalCheck(signature []byte, txhash []byte) (bool){
